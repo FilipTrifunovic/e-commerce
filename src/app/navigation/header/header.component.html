@@ -1,0 +1,35 @@
+<mat-toolbar color="primary">
+  <div class="d-flex flex-row justify-content-between w-100">
+    <div class="d-flex flex-row align-self-end">
+      <div>
+        <button mat-icon-button (click)="onToggleSideNav()">
+          <mat-icon>menu</mat-icon>
+        </button>
+      </div>
+      <div class="align-content-center"><a routerLink="/">Online Store</a></div>
+    </div>
+    <div class="mr-2">
+      <div class="h-100 align-content-center">
+        <ul class="navigation-items d-flex">
+          <!-- <li *ngIf="!isAuth"><a routerLink="/login">Login</a></li>
+              <li *ngIf="!isAuth"><a routerLink="/register">Register</a></li>
+              <li *ngIf="!isAuth"><a routerLink="/training">Training</a></li>
+              <li style="cursor: pointer;" *ngIf="isAuth"><a (click)="onLogout()" >Logout</a></li> -->
+          <li>
+            <button (click)="goToShoppingCart()" mat-button [matBadge]="shoppingCartService.getTotalItems()"
+              matBadgeColor="warn" class="align-content-end"
+              (click)="navigateToShoppingCartPage()"><mat-icon>shopping_cart</mat-icon></button>
+          </li>
+          <li><button mat-button [matMenuTriggerFor]="menu"><mat-icon>more_vert</mat-icon> </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item routerLink="/">Home</button>
+              <button mat-menu-item routerLink="/userProfile">My Profile</button>
+              <button mat-menu-item (click)="logout()">Logout</button>
+            </mat-menu>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</mat-toolbar>
+<br>

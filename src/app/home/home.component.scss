@@ -1,0 +1,51 @@
+// .product-card {
+//   width: 300px;
+//   margin: 5px 5px;
+//   display: inline-block;
+//   max-resolution: 1px solid black;
+// }
+
+// .example-header-image {
+//   background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+//   background-size: contain;
+// }
+
+// .card-image {
+//   width: 299px;
+//   height: 270px;
+//   margin: 0px 1px;
+// }
+
+// .example-card:hover {}
+
+
+.shopping-cart-container {
+  height: 100%;
+}
+
+.search-card {
+  margin: 20px;
+  padding: 10px;
+}
+
+.products-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 20px;
+}
+
+.product-card {
+  width: 300px;
+  margin: 10px;
+}
+
+.view-details {
+  margin-left: 5px;
+}
+
+.card-image {
+  width: 100%;
+  height: auto;
+  height: 200px;
+}

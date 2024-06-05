@@ -1,0 +1,24 @@
+<mat-toolbar color="primary">
+  <span>Chat</span>
+  <span class="spacer"></span>
+  <button mat-icon-button mat-dialog-close>
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-toolbar>
+
+<mat-dialog-content class="chat-container">
+  <div *ngFor="let msg of messages"
+    [ngClass]="{'user-message': msg.sender === 'user', 'bot-message': msg.sender === 'bot'}">
+    {{ msg.text }}
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end" class="message-input-container">
+  <mat-form-field class="message-input" appearance="outline">
+    <mat-label>Type your message</mat-label>
+    <input matInput [(ngModel)]="message" (keyup.enter)="sendMessage()">
+  </mat-form-field>
+  <button mat-icon-button color="primary" (click)="sendMessage()">
+    <mat-icon>send</mat-icon>
+  </button>
+</mat-dialog-actions>

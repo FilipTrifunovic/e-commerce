@@ -1,0 +1,36 @@
+<section class="signup-form">
+  <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="9px" #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <mat-form-field>
+      <input type="email" matInput placeholder="Your email" ngModel name="email" email required #emailInput="ngModel">
+      <mat-error *ngIf="emailInput.hasError('required')">Field must not be empty.</mat-error>
+      <mat-error *ngIf="!emailInput.hasError('required')">Invalid E-mail.</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input type="text" matInput placeholder="Your name" ngModel name="name" required>
+      <mat-error>Field must not be empty.</mat-error>
+    </mat-form-field>
+    <mat-form-field hintLabel="Should be 3 characters long">
+      <input type="password" matInput placeholder="Your password" ngModel name="password" required minlength="3" #pwInput="ngModel">
+      <mat-hint align="end">{{ pwInput.value?.length }} /3</mat-hint>
+      <mat-error>Must be at least 3 character long.</mat-error>
+    </mat-form-field>
+    <!-- <mat-form-field>
+      <input type="password" matInput placeholder="Confirm your password" ngModel name="confpassword" required minlength="3">
+    </mat-form-field> --> 
+    <mat-form-field>
+      <input matInput 
+      placeholder="Your Birthdate" 
+      ngModel name="birthdate" 
+      [matDatepicker]="datePicker"
+      [max]="maxDate"
+      required>
+      <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+      <mat-datepicker #datePicker></mat-datepicker>
+    </mat-form-field>
+      <mat-checkbox color="primary" ngModel name="agree" required>
+        Agree to Term and Conditions.
+      </mat-checkbox>
+    <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid"
+            [@buttonState]="f.valid ? 'valid' : 'invalid'"><mat-icon>done</mat-icon></button>
+  </form>
+</section>

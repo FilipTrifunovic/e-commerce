@@ -1,0 +1,79 @@
+<!-- <div class="product-list h-100 w-100">
+  <mat-card *ngFor="let product of products" class="product-card">
+    <mat-card-header>
+      <mat-card-title>{{ product.title }}</mat-card-title>
+      <mat-card-subtitle>\${{ product.price }}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image [src]="product.image" alt="{{ product.title }}">
+    <mat-card-content>
+      <p>{{ product.description }}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="removeFromCart(product.id)">Remove</button>
+    </mat-card-actions>
+  </mat-card>
+</div> -->
+
+
+<div class="shopping-cart-container">
+  <button mat-button class="back-button" (click)="goBack()">
+    <mat-icon>arrow_back</mat-icon> Back
+  </button>
+  <h1>Shopping Cart</h1>
+  <table mat-table [dataSource]="cartItems" class="mat-elevation-z8">
+
+    <!-- Product Image Column -->
+    <ng-container matColumnDef="image">
+      <th mat-header-cell *matHeaderCellDef> </th>
+      <td mat-cell *matCellDef="let item">
+        <img [src]="item.image" alt="{{item.name}}" class="product-image">
+      </td>
+    </ng-container>
+
+    <!-- Product Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Product </th>
+      <td mat-cell *matCellDef="let item"> {{item.title}} </td>
+    </ng-container>
+
+    <!-- Quantity Column -->
+    <ng-container matColumnDef="quantity">
+      <th mat-header-cell *matHeaderCellDef> Quantity </th>
+      <td mat-cell *matCellDef="let item"> {{item.quantity}} </td>
+    </ng-container>
+
+    <!-- Price Column -->
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef> Price </th>
+      <td mat-cell *matCellDef="let item"> {{item.price | currency}} </td>
+    </ng-container>
+
+    <!-- Total Column -->
+    <ng-container matColumnDef="total">
+      <th mat-header-cell *matHeaderCellDef> Total </th>
+      <td mat-cell *matCellDef="let item"> {{item.price * item.quantity | currency}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <td mat-cell *matCellDef="let item; let i = index">
+        <button mat-icon-button color="warn" (click)="removeItem(item.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <div class="total-price">
+    <h2>Total Price: {{ getTotalPrice() | currency }}</h2>
+  </div>
+
+
+  <div class="actions">
+    <button mat-raised-button color="warn" (click)="clearCart()">Clear Cart</button>
+    <button mat-raised-button color="primary" (click)="checkout()">Checkout</button>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+.star-rating {
+  display: flex;
+  flex-direction: row;
+}
+
+.star-rating mat-icon {
+  cursor: pointer;
+  color: grey;
+}
+
+.star-rating mat-icon.active {
+  color: gold;
+}

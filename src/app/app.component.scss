@@ -1,0 +1,56 @@
+.custom-dialog-container {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  margin: 0;
+  border-radius: 0;
+  width: 400px;
+  height: 600px;
+  animation: slideIn 0.3s forwards;
+}
+
+.transparent-backdrop {
+  background: transparent;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(100%);
+  }
+}
+
+
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+mat-sidenav-container {
+  flex: 1;
+}
+
+.main-content {
+  height: 90%;
+}
+
+.chat-button {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  z-index: 1;
+}
