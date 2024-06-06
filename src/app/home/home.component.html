@@ -12,8 +12,12 @@
               <input matInput formControlName="title">
             </mat-form-field>
             <mat-form-field appearance="fill">
-              <mat-label>Price</mat-label>
-              <input matInput formControlName="price" type="number">
+              <mat-label>Price From</mat-label>
+              <input matInput formControlName="priceFrom" type="number">
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>Price To</mat-label>
+              <input matInput formControlName="priceTo" type="number">
             </mat-form-field>
             <mat-form-field appearance="fill">
               <mat-label>Type</mat-label>
@@ -32,6 +36,8 @@
               <input matInput formControlName="manufacturer">
             </mat-form-field>
             <button mat-raised-button color="primary" (click)="applyFilters()">Apply Filters</button>
+            <button mat-raised-button color="primary" style="margin-top: 10px;" (click)="clearFilters()">Clear
+              Filters</button>
           </div>
         </form>
       </mat-card-content>
@@ -39,8 +45,7 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <div class="products-container">
-      <mat-card class="product-card" *ngFor="let product of filteredProducts" @cardState
-        (click)="viewProductDetails(product.id)">
+      <mat-card class="product-card" *ngFor="let product of filteredProducts">
         <mat-card-header>
           <!-- <div mat-card-avatar class="example-header-image"></div> -->
           <mat-card-title>{{ product.title }}</mat-card-title>
@@ -60,20 +65,3 @@
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
-
-
-<!-- <mat-card class="product-card" *ngFor="let product of products" @cardState (click)="viewProductDetails(product.id)">
-  <mat-card-header>
-    <mat-card-title>{{ product.title }}</mat-card-title>
-    <mat-card-subtitle>{{ product.type }}</mat-card-subtitle>
-  </mat-card-header>
-  <img mat-card-image src="{{ product.image }}" alt="Photo of {{ product.title }}" class="card-image">
-  <mat-card-content>
-    <p>
-      {{ product.description }}
-    </p>
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-raised-button color="primary" (click)="addToCart(product)">BUY: {{ product.price }} $</button>
-  </mat-card-actions>
-</mat-card> -->

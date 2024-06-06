@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { CLOSE_SIZE, CLOTHES_TYPE, Product, Review } from "../models/product.model";
+import { CLOTHES_SIZE, CLOTHES_TYPE, Product, Review } from "../models/product.model";
 
 import { map, pluck, flatMap, catchError } from 'rxjs/operators';
 import { BehaviorSubject, Observable, from, of, throwError } from "rxjs";
@@ -22,10 +22,10 @@ export class ProductService {
       image: "assets/images/haljina.jpg",
       text: "Prolecna haljina.",
       type: CLOTHES_TYPE.FASHION,
-      size: CLOSE_SIZE.S,
+      size: CLOTHES_SIZE.S,
       manufacturer: "H&M",
-      dateCreated: new Date(),
-      quantity: 3,
+      dateCreated: new Date('2021-01-15'),
+      quantity: 0,
       reviews: []
     },
     {
@@ -36,10 +36,10 @@ export class ProductService {
       image: "assets/images/muska-majica.jpg",
       text: "Letnja majica.",
       type: CLOTHES_TYPE.CASUAL,
-      size: CLOSE_SIZE.M,
+      size: CLOTHES_SIZE.M,
       manufacturer: "Zara",
-      dateCreated: new Date(),
-      quantity: 5,
+      dateCreated: new Date('2020-05-20'),
+      quantity: 0,
       reviews: []
     },
     {
@@ -50,10 +50,10 @@ export class ProductService {
       image: "assets/images/pantalone.jpg",
       text: "Jesenje pantalone.",
       type: CLOTHES_TYPE.FORMAL,
-      size: CLOSE_SIZE.L,
+      size: CLOTHES_SIZE.L,
       manufacturer: "Gucci",
-      dateCreated: new Date(),
-      quantity: 3,
+      dateCreated: new Date('2021-03-10'),
+      quantity: 0,
       reviews: []
     },
     {
@@ -64,10 +64,10 @@ export class ProductService {
       image: "assets/images/suknja.jpg",
       text: "Letnja suknja.",
       type: CLOTHES_TYPE.FASHION,
-      size: CLOSE_SIZE.M,
+      size: CLOTHES_SIZE.M,
       manufacturer: "H&M",
-      dateCreated: new Date(),
-      quantity: 6,
+      dateCreated: new Date('2021-07-25'),
+      quantity: 0,
       reviews: []
     },
     {
@@ -78,10 +78,10 @@ export class ProductService {
       image: "assets/images/jakna.jpg",
       text: "Zimska jakna.",
       type: CLOTHES_TYPE.OUTERWEAR,
-      size: CLOSE_SIZE.L,
+      size: CLOTHES_SIZE.L,
       manufacturer: "North Face",
-      dateCreated: new Date(),
-      quantity: 4,
+      dateCreated: new Date('2020-11-05'),
+      quantity: 0,
       reviews: []
     },
     {
@@ -92,10 +92,10 @@ export class ProductService {
       image: "assets/images/cipele.jpg",
       text: "Elegantne cipele.",
       type: CLOTHES_TYPE.FORMAL,
-      size: CLOSE_SIZE.M,
+      size: CLOTHES_SIZE.M,
       manufacturer: "Prada",
-      dateCreated: new Date(),
-      quantity: 7,
+      dateCreated: new Date('2021-02-18'),
+      quantity: 0,
       reviews: []
     },
     {
@@ -106,10 +106,10 @@ export class ProductService {
       image: "assets/images/sandale.jpg",
       text: "Letnje sandale.",
       type: CLOTHES_TYPE.CASUAL,
-      size: CLOSE_SIZE.S,
+      size: CLOTHES_SIZE.S,
       manufacturer: "Zara",
-      dateCreated: new Date(),
-      quantity: 5,
+      dateCreated: new Date('2020-08-30'),
+      quantity: 0,
       reviews: []
     },
     {
@@ -120,10 +120,10 @@ export class ProductService {
       image: "assets/images/kaput.jpg",
       text: "Prolecni kaput.",
       type: CLOTHES_TYPE.OUTERWEAR,
-      size: CLOSE_SIZE.L,
+      size: CLOTHES_SIZE.L,
       manufacturer: "Burberry",
-      dateCreated: new Date(),
-      quantity: 3,
+      dateCreated: new Date('2021-04-22'),
+      quantity: 0,
       reviews: []
     },
     {
@@ -134,10 +134,10 @@ export class ProductService {
       image: "assets/images/sorts.jpg",
       text: "Sportski šorts.",
       type: CLOTHES_TYPE.SPORTS,
-      size: CLOSE_SIZE.M,
+      size: CLOTHES_SIZE.M,
       manufacturer: "Nike",
-      dateCreated: new Date(),
-      quantity: 4,
+      dateCreated: new Date('2020-06-14'),
+      quantity: 0,
       reviews: []
     },
     {
@@ -148,10 +148,10 @@ export class ProductService {
       image: "assets/images/haljina2.jpg",
       text: "Letnja haljina.",
       type: CLOTHES_TYPE.FASHION,
-      size: CLOSE_SIZE.S,
+      size: CLOTHES_SIZE.S,
       manufacturer: "Zara",
-      dateCreated: new Date(),
-      quantity: 2,
+      dateCreated: new Date('2021-09-05'),
+      quantity: 0,
       reviews: []
     },
     {
@@ -162,10 +162,10 @@ export class ProductService {
       image: "assets/images/pulover.jpg",
       text: "Jesenji pulover.",
       type: CLOTHES_TYPE.CASUAL,
-      size: CLOSE_SIZE.M,
+      size: CLOTHES_SIZE.M,
       manufacturer: "H&M",
-      dateCreated: new Date(),
-      quantity: 4,
+      dateCreated: new Date('2020-10-10'),
+      quantity: 0,
       reviews: []
     }
   ];
@@ -186,8 +186,8 @@ export class ProductService {
     return from([this.products]);
   }
 
-  getProductById(id: number): Observable<Product> {
-    return from([this.products.find(product => product.id === id)]);
+  getProductById(id: number): Product {
+    return this.products.find(product => product.id === id);
   }
 
 } 

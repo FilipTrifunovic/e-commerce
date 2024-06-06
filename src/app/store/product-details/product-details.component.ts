@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProductService } from '../../shared/services/product.sevice';
+import { ProductService } from '../../shared/services/product.service';
 import { Product } from '../../shared/models/product.model';
 import { MatCard, MatCardModule } from '@angular/material/card';
 import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
@@ -55,7 +55,7 @@ export class ProductDetailComponent implements OnInit {
 
   ngOnInit(): void {
     const itemId = this.route.snapshot.paramMap.get('id');
-    this.productService.getProductById(+itemId).subscribe(item => this.item = item);
+    this.item = this.productService.getProductById(+itemId);
   }
 
   onSubmit(): void {
@@ -71,7 +71,7 @@ export class ProductDetailComponent implements OnInit {
   }
 
   addToCart(product: Product) {
-    this.shoppingCartService.addProduct({ ...product, quantity: 1 });
+    this.shoppingCartService.addProduct(product.id, 1);
     this.toastr.success('Product added to cart', 'Success', {
       positionClass: 'toast-bottom-right'
     });

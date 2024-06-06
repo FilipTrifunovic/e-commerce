@@ -16,8 +16,8 @@
               <li *ngIf="!isAuth"><a routerLink="/training">Training</a></li>
               <li style="cursor: pointer;" *ngIf="isAuth"><a (click)="onLogout()" >Logout</a></li> -->
           <li>
-            <button (click)="goToShoppingCart()" mat-button [matBadge]="shoppingCartService.getTotalItems()"
-              matBadgeColor="warn" class="align-content-end"
+            <button (click)="goToShoppingCart()" mat-button [matBadge]="totalItems$ | async" matBadgeColor="warn"
+              class="align-content-end"
               (click)="navigateToShoppingCartPage()"><mat-icon>shopping_cart</mat-icon></button>
           </li>
           <li><button mat-button [matMenuTriggerFor]="menu"><mat-icon>more_vert</mat-icon> </button>

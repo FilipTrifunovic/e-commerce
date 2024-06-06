@@ -23,14 +23,21 @@ export class UserService {
     phone: '123-456-7890',
     address: '123 Main St',
     favoriteItems: ['Item 1', 'Item 2'],
-    username: 'johndoe',
-    password: 'password'
+    username: 'admin',
+    password: 'admin'
   };
 
   constructor() { }
 
   getUserProfile(userId: string): Observable<UserProfile> {
     return of(this.userProfile);
+  }
+
+  getUserByUsernameAndPassword(username: string, password: string): UserProfile {
+    if (username === this.userProfile.username && password === this.userProfile.password) {
+      return this.userProfile;
+    }
+    return null;
   }
 
   updateUserProfile(userId: string, profileData: UserProfile): Observable<UserProfile> {

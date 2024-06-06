@@ -9,6 +9,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { ChatService } from '../../services/chat.service';
 import { HttpClientModule } from '@angular/common/http';
+import { ShoppingCartService } from '../../services/shopping-cart.service';
 
 @Component({
   selector: 'chat-dialog',
@@ -23,6 +24,7 @@ export class ChatDialogComponent {
 
   constructor(
     private chatService: ChatService,
+    private shopingCartService: ShoppingCartService
   ) {
 
   }
@@ -32,11 +34,20 @@ export class ChatDialogComponent {
       this.messages.push({ text: this.message, sender: 'user' });
       this.chatService.sendMessage(this.message).subscribe(response => {
         debugger;
+        this.addToCart(response);
         response.forEach((msg: any) => this.messages.push({ text: msg.text, sender: 'bot' }));
       });
       this.message = '';
     }
   }
+
+  addToCart(response: any): void {
+    if (response.length > 1 && response[1].custom.action === 'add_to_cart') {
+      var productId = response[1].custom.product_id;
+      this.shopingCartService.addProduct(productId, 1);
+    }
+  }
+
 
   closeDialog(): void {
 

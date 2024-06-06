@@ -3,11 +3,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatBadgeModule } from '@angular/material/badge';
-import { CommonModule } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { AuthService } from '../../authentication/auth.service';
 import { ShoppingCartService } from '../../shared/services/shopping-cart.service';
 import { Router, RouterModule } from '@angular/router';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -20,13 +21,14 @@ import { Router, RouterModule } from '@angular/router';
     MatBadgeModule,
     CommonModule,
     MatButtonModule,
-    RouterModule],
+    RouterModule,
+    AsyncPipe],
   styleUrls: ['./header.component.scss'],
   standalone: true,
 })
 export class HeaderComponent implements OnInit {
   @Output() sideNavToggle = new EventEmitter<void>();
-  badge: number = 4;
+  totalItems$: Observable<number>;
   isAuth = true;
 
 
@@ -37,7 +39,7 @@ export class HeaderComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.badge = 4;
+    this.totalItems$ = this.shoppingCartService.getTotalItems();
   }
 
   onToggleSideNav() {

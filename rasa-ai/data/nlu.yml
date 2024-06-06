@@ -3,16 +3,29 @@ version: "3.1"
 nlu:
   - intent: ask_product_info
     examples: |
-      - What are the details of Haljina?
-      - Tell me about Majica
-      - Can you give me details for Pantalone?
-      - I need details for Suknja
-      - What's the information for Jakna?
-      - How can I find details for Cipele?
-      - Show me the details of Sandale
-      - Give me the details for Kaput
-      - What are the details for Šorts?
-      - Do you know the details of Pulover?
+      - I am looking for [Haljina](product_name)
+      - Do you have any [Majica](product_name) products?
+      - I want to buy [Pantalone](product_name)
+      - Show me [Suknja](product_name)
+      - I need a [Jakna](product_name)
+      - I am interested in [Cipele](product_name)
+      - Can you show me [Sandale](product_name)?
+      - Do you have any [Kaput](product_name) available?
+      - I am looking for [Šorts](product_name) in medium size.
+      - I want to buy a [Pulover](product_name)
+
+  - intent: add_to_cart
+    examples: |
+      - Add [Haljina](product_name) to my cart
+      - I want to add [Majica](product_name) to my cart
+      - Can you add [Pantalone](product_name) to the cart?
+      - Please add [Suknja](product_name) to my cart
+      - Add [Jakna](product_name) to the cart
+      - Add [Cipele](product_name) to my shopping cart
+      - Put [Sandale](product_name) in my cart
+      - Add [Kaput](product_name) to the cart
+      - I want to add [Šorts](product_name) to my cart
+      - Can you add [Pulover](product_name) to the cart?
 
   - intent: greet
     examples: |
@@ -105,7 +118,3 @@ nlu:
 
 entities:
   - product_name
-
-regex:
-  - name: product_name
-    pattern: (Haljina|Majica|Pantalone|Suknja|Jakna|Cipele|Sandale|Kaput|Šorts|Pulover)

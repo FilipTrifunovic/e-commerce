@@ -38,6 +38,7 @@
 .product-card {
   width: 300px;
   margin: 10px;
+  transition: transform 300ms ease-in-out, box-shadow 300ms ease-in-out;
 }
 
 .view-details {

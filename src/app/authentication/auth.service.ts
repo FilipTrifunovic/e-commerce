@@ -1,8 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
-import { HttpClient } from "@angular/common/http";
-import { map, catchError } from "rxjs/operators";
-import { BehaviorSubject, Observable, of, throwError } from "rxjs";
+import { BehaviorSubject, Observable, of } from "rxjs";
+import { UserService } from "./user-profile.service";
 
 @Injectable({
   providedIn: 'root'
@@ -11,20 +10,16 @@ export class AuthService {
   private isLoggedInSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.hasToken());
   public isLoggedIn$: Observable<boolean> = this.isLoggedInSubject.asObservable();
 
-  private users = [
-    { username: 'admin', password: 'admin' },
-    { username: 'user1', password: 'password1' },
-  ];
-
-
-  constructor(private router: Router,) { }
+  constructor(private router: Router,
+    private userService: UserService,
+  ) { }
 
   private hasToken(): boolean {
     return !!localStorage.getItem('token');
   }
 
   signIn(username: string, password: string): Observable<boolean> {
-    const user = this.users.find(u => u.username === username && u.password === password);
+    const user = this.userService.getUserByUsernameAndPassword(username, password);
     if (user) {
       localStorage.setItem('token', 'some-random-token');
       this.isLoggedInSubject.next(true);

@@ -9,6 +9,7 @@ intents:
   - mood_unhappy
   - bot_challenge
   - ask_product_info
+  - add_to_cart
 
 entities:
   - product_name
@@ -16,10 +17,14 @@ entities:
 slots:
   product_name:
     type: text
-    influence_conversation: false
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: product_name
 
 actions:
   - action_get_product_info
+  - action_add_to_cart
 
 responses:
   utter_product_info:

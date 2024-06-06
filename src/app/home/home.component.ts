@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from '../shared/services/product.sevice';
-import { CLOSE_SIZE, CLOTHES_TYPE, Product } from '../shared/models/product.model';
-import { cardHoverStateTrigger } from '../shared/animations/prcard-animation';
+import { ProductService } from '../shared/services/product.service';
+import { CLOTHES_SIZE, CLOTHES_TYPE, Product } from '../shared/models/product.model';
 import { MatCardModule } from '@angular/material/card';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
@@ -33,16 +32,13 @@ import { RouterModule } from '@angular/router';
     MatSelectModule,
     MatDatepickerModule,
     RouterModule],
-  animations: [
-    cardHoverStateTrigger
-  ],
   standalone: true,
 })
 export class HomeComponent implements OnInit {
   searchForm: FormGroup;
   products: Product[] = [];
   clothesTypes = Object.values(CLOTHES_TYPE);
-  sizes = Object.values(CLOSE_SIZE);
+  sizes = Object.values(CLOTHES_SIZE);
   constructor(
     private productService: ProductService,
     private shoppingCartService: ShoppingCartService,
@@ -50,7 +46,8 @@ export class HomeComponent implements OnInit {
     private fb: FormBuilder) {
     this.searchForm = this.fb.group({
       title: [''],
-      price: [''],
+      priceFrom: [''],
+      priceTo: [''],
       type: [''],
       size: [''],
       manufacturer: ['']
@@ -64,13 +61,14 @@ export class HomeComponent implements OnInit {
     this.getSearchFilter();
   }
 
-  applyFilters() {
-    const { title, price, type, size, manufacturer } = this.searchForm.value;
+  applyFilters(): void {
+    const { title, priceFrom, priceTo, type, size, manufacturer } = this.searchForm.value;
 
     this.filteredProducts = this.products.filter(product => {
       return (
         (!title || product.title.toLowerCase().includes(title.toLowerCase())) &&
-        (!price || product.price <= price) &&
+        (!priceFrom || product.price >= priceFrom) &&
+        (!priceTo || product.price <= priceTo) &&
         (!type || product.type === type) &&
         (!size || product.size === size) &&
         (!manufacturer || product.manufacturer === manufacturer)
@@ -78,13 +76,16 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  clearFilters(): void {
+    this.searchForm.reset();
+    this.filteredProducts = this.products;
+  }
+
   getProducts() {
     this.productService.getProductList().
       subscribe(
         (products) => {
           this.products = products;
-          console.log(this.products);
-
         }
       )
   }
@@ -106,12 +107,8 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  viewProductDetails(productId: number) {
-    console.log(productId);
-  }
-
   addToCart(product: Product) {
-    this.shoppingCartService.addProduct({ ...product, quantity: 1 });
+    this.shoppingCartService.addProduct(product.id, 1);
     this.toastr.success('Product added to cart', 'Success', {
       positionClass: 'toast-bottom-right'
     });

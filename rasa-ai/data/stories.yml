@@ -34,3 +34,10 @@ stories:
         entities:
           - product_name: "Haljina"
       - action: action_get_product_info
+
+  - story: add item to cart
+    steps:
+      - intent: add_to_cart
+        entities:
+          - product_name: "Haljina"
+      - action: action_add_to_cart

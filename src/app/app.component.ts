@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, ViewContainerRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
@@ -8,7 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { ChatDialogComponent } from './shared/components/chat-dialog/chat-dialog.component';
-import { ProductService } from './shared/services/product.sevice';
+import { ProductService } from './shared/services/product.service';
 import { AuthService } from './authentication/auth.service';
 import { ShoppingCartService } from './shared/services/shopping-cart.service';
 import { ShoppingCartComponent } from './store/shopping-cart/shopping-cart.component';
@@ -50,7 +50,8 @@ export class AppComponent {
 
   constructor(
     private dialog: MatDialog,
-    public authService: AuthService) { }
+    public authService: AuthService,
+    private viewContainerRef: ViewContainerRef) { }
 
   toggleSidenav() {
     this.sidenav.toggle();
@@ -62,7 +63,8 @@ export class AppComponent {
       height: '500px',
       position: { right: '10px', bottom: '10px' },
       panelClass: 'custom-dialog-container',
-      backdropClass: 'transparent-backdrop'
+      backdropClass: 'transparent-backdrop',
+      viewContainerRef: this.viewContainerRef
     });
 
     this.dialogRef.afterClosed().subscribe(() => {

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
-import { buttonStateTrigger } from '../../shared/animations/registerbtn-animation';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -14,9 +13,6 @@ import { CommonModule } from '@angular/common';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
   imports: [MatFormFieldModule, MatInputModule, MatDatepickerModule, MatNativeDateModule, MatCheckboxModule, MatIconModule, FormsModule, CommonModule],
-  animations: [
-    buttonStateTrigger
-  ],
   standalone: true
 })
 export class RegisterComponent implements OnInit {

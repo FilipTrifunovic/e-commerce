@@ -7,7 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { ProductService } from '../../shared/services/product.sevice';
+import { ProductService } from '../../shared/services/product.service';
 import { Product, Review } from '../../shared/models/product.model';
 import { ToastrService } from 'ngx-toastr';
 
