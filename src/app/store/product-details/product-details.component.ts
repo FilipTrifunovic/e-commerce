@@ -11,7 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { StarRatingComponent } from '../../shared/components/star-rating/star-rating.component';
+import { StarRatingComponent } from '../star-rating/star-rating.component';
 import { RatingComponent } from '../product-rating/product-rating.component';
 
 @Component({

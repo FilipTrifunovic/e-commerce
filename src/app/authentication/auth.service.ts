@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { HttpClient } from "@angular/common/http";
-import { User } from "./user.model";
 import { map, catchError } from "rxjs/operators";
 import { BehaviorSubject, Observable, of, throwError } from "rxjs";
 
@@ -15,11 +14,10 @@ export class AuthService {
   private users = [
     { username: 'admin', password: 'admin' },
     { username: 'user1', password: 'password1' },
-    { username: 'user2', password: 'password2' }
   ];
 
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,) { }
 
   private hasToken(): boolean {
     return !!localStorage.getItem('token');

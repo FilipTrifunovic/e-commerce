@@ -8,7 +8,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { ChatDialogComponent } from './shared/components/chat-dialog/chat-dialog.component';
-import { SearchToolbarComponent } from './shared/components/search-toolbar/search-toolbar.component';
 import { ProductService } from './shared/services/product.sevice';
 import { AuthService } from './authentication/auth.service';
 import { ShoppingCartService } from './shared/services/shopping-cart.service';
@@ -16,7 +15,7 @@ import { ShoppingCartComponent } from './store/shopping-cart/shopping-cart.compo
 import { UserService } from './authentication/user-profile.service';
 import { UserProfileComponent } from './authentication/user-profile/user-profile.component';
 import { ChatService } from './shared/services/chat.service';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -30,7 +29,6 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     MatIconModule,
     MatButtonModule,
     ChatDialogComponent,
-    SearchToolbarComponent,
     ShoppingCartComponent,
     RouterModule,
     UserProfileComponent,
@@ -52,8 +50,7 @@ export class AppComponent {
 
   constructor(
     private dialog: MatDialog,
-    public authService: AuthService,
-    private http: HttpClient) { }
+    public authService: AuthService) { }
 
   toggleSidenav() {
     this.sidenav.toggle();
