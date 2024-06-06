@@ -1,0 +1,59 @@
+.rating-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  //height: 100vh;
+  padding-top: 20px;
+  // padding-top: 20px;
+}
+
+.star-rating {
+  display: flex;
+  align-items: center;
+}
+
+.star-rating mat-icon {
+  cursor: pointer;
+  font-size: 40px;
+  color: grey;
+}
+
+.filled-star {
+  color: gold;
+}
+
+.star-icon {
+  width: 40px;
+  height: 40px;
+}
+
+.comment-header {
+  font: 400 14px/20px Roboto, sans-serif
+}
+
+.text-area {
+  width: 100%;
+}
+
+.rating-value {
+  margin-top: 10px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.rating-card {
+  width: 100%;
+}
+
+.comment-field {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.comments-section {
+  margin-top: 20px;
+}
+
+.comment {
+  margin-top: 10px;
+}

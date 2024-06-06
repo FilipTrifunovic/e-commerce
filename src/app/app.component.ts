@@ -82,3 +82,8 @@ export class AppComponent {
     this.searchResults = searchCriteria;
   }
 }
+
+
+// rasa run -m models --enable-api --cors “*” --endpoints endpoints.yml --debug  - run rasa
+// rasa run actions --port 5055
+

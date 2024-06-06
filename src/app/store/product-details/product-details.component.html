@@ -1,4 +1,12 @@
 <div class="item-detail-container" *ngIf="item">
+  <div class="d-flex flex-row justify-content-between mb-2">
+    <button mat-button (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon> Back
+    </button>
+    <button mat-raised-button color="primary" (click)="addToCart(item)">
+      Add to Cart
+    </button>
+  </div>
   <mat-card class="item-card">
     <mat-card-header>
       <mat-card-title>{{ item.title }}</mat-card-title>
@@ -9,14 +17,9 @@
       <p><strong>Type:</strong> {{ item.type }}</p>
       <p><strong>Size:</strong> {{ item.size }}</p>
       <p><strong>Manufacturer:</strong> {{ item.manufacturer }}</p>
-      <p><strong>Date of Production:</strong> {{ item.dateCreated| date }}</p>
+      <p><strong>Date of Production:</strong> {{ item.dateCreated | date }}</p>
       <p><strong>Price:</strong> {{ item.price | currency }}</p>
-      <!-- <p><strong>Rating:</strong> {{ item.rating }}</p> -->
     </mat-card-content>
   </mat-card>
-  <mat-card-actions>
-    <button mat-raised-button color="primary" (click)="addToCart(item)">
-      Add to Cart
-    </button>
-  </mat-card-actions>
+  <app-rating [product]="item"></app-rating>
 </div>

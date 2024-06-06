@@ -25,3 +25,31 @@
 mat-card-content p {
   margin: 10px 0;
 }
+
+.item-detail-container {
+  padding: 20px;
+}
+
+.rate-comment-card {
+  margin-top: 20px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.rating-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.rating-container mat-slider {
+  width: 80%;
+}
+
+.rating-value {
+  font-size: 1.2em;
+  margin-left: 10px;
+}

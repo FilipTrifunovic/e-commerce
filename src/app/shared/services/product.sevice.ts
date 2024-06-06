@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { CLOSE_SIZE, CLOTHES_TYPE, Product } from "../models/product.model";
+import { CLOSE_SIZE, CLOTHES_TYPE, Product, Review } from "../models/product.model";
 
 import { map, pluck, flatMap, catchError } from 'rxjs/operators';
 import { BehaviorSubject, Observable, from, of, throwError } from "rxjs";
@@ -25,7 +25,8 @@ export class ProductService {
       size: CLOSE_SIZE.S,
       manufacturer: "H&M",
       dateCreated: new Date(),
-      quantity: 3
+      quantity: 3,
+      reviews: []
     },
     {
       id: 2,
@@ -38,7 +39,8 @@ export class ProductService {
       size: CLOSE_SIZE.M,
       manufacturer: "Zara",
       dateCreated: new Date(),
-      quantity: 5
+      quantity: 5,
+      reviews: []
     },
     {
       id: 3,
@@ -51,7 +53,8 @@ export class ProductService {
       size: CLOSE_SIZE.L,
       manufacturer: "Gucci",
       dateCreated: new Date(),
-      quantity: 3
+      quantity: 3,
+      reviews: []
     },
     {
       id: 4,
@@ -64,7 +67,8 @@ export class ProductService {
       size: CLOSE_SIZE.M,
       manufacturer: "H&M",
       dateCreated: new Date(),
-      quantity: 6
+      quantity: 6,
+      reviews: []
     },
     {
       id: 5,
@@ -77,7 +81,8 @@ export class ProductService {
       size: CLOSE_SIZE.L,
       manufacturer: "North Face",
       dateCreated: new Date(),
-      quantity: 4
+      quantity: 4,
+      reviews: []
     },
     {
       id: 6,
@@ -90,7 +95,8 @@ export class ProductService {
       size: CLOSE_SIZE.M,
       manufacturer: "Prada",
       dateCreated: new Date(),
-      quantity: 7
+      quantity: 7,
+      reviews: []
     },
     {
       id: 7,
@@ -103,7 +109,8 @@ export class ProductService {
       size: CLOSE_SIZE.S,
       manufacturer: "Zara",
       dateCreated: new Date(),
-      quantity: 5
+      quantity: 5,
+      reviews: []
     },
     {
       id: 8,
@@ -116,7 +123,8 @@ export class ProductService {
       size: CLOSE_SIZE.L,
       manufacturer: "Burberry",
       dateCreated: new Date(),
-      quantity: 3
+      quantity: 3,
+      reviews: []
     },
     {
       id: 9,
@@ -129,7 +137,8 @@ export class ProductService {
       size: CLOSE_SIZE.M,
       manufacturer: "Nike",
       dateCreated: new Date(),
-      quantity: 4
+      quantity: 4,
+      reviews: []
     },
     {
       id: 10,
@@ -142,7 +151,8 @@ export class ProductService {
       size: CLOSE_SIZE.S,
       manufacturer: "Zara",
       dateCreated: new Date(),
-      quantity: 2
+      quantity: 2,
+      reviews: []
     },
     {
       id: 11,
@@ -155,12 +165,17 @@ export class ProductService {
       size: CLOSE_SIZE.M,
       manufacturer: "H&M",
       dateCreated: new Date(),
-      quantity: 4
+      quantity: 4,
+      reviews: []
     }
   ];
 
 
   constructor() {
+  }
+  addReview(productId: number, review: Review) {
+    const product = this.products.find(product => product.id === productId);
+    product.reviews.push(review);
   }
 
   changeSearchCriteria(criteria: string) {

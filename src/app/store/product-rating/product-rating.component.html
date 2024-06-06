@@ -1,0 +1,53 @@
+<div class="rating-container">
+  <mat-card class="rating-card">
+    <mat-card-title style="padding-left: 16px;">Product Rating</mat-card-title>
+    <mat-card-content>
+      <div class="d-flex flex-row justify-content-between ">
+        <div>
+          <form (ngSubmit)="submitComment()">
+            <mat-form-field appearance="outline" class="comment-field">
+              <mat-label>Add a Comment</mat-label>
+              <textarea class="text-area" matInput [(ngModel)]="comment" name="comment"></textarea>
+            </mat-form-field>
+            <button mat-raised-button color="primary" type="submit">Submit</button>
+          </form>
+        </div>
+        <div>
+
+          <div class="star-rating d-flex flex-column">
+            <div>Add Rating</div>
+            <div class="d-flex flex-row">
+              <mat-icon class="star-icon" *ngFor="let star of stars; let i = index" (click)="rateProduct(i + 1)"
+                (mouseover)="hoverRate(i + 1)" (mouseleave)="hoverRate(0)" [ngClass]="{
+                  'filled-star': i < rating,'hovered-star': i < hoverRating && i >= rating }" matTooltip="{{i + 1}}">
+                star
+              </mat-icon>
+            </div>
+          </div>
+          <div class="rating-value">
+            Rating: {{rating}} / 5
+          </div>
+        </div>
+      </div>
+
+      <div class="comments-section" *ngIf="product.reviews.length > 0">
+        <h2><strong>Comments</strong></h2>
+        <div *ngFor="let review of product.reviews" class="comment">
+          <mat-card>
+            <mat-card-content>
+              <div class="d-flex flex-row justify-content-between">
+                <div>
+                  <p>{{ review.comment }}</p>
+                </div>
+                <div>
+                  <p>Rating: {{ review.rating }} / 5</p>
+                  <p>Date: {{ review.date | date: 'short' }}</p>
+                </div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

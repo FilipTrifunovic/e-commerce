@@ -10,7 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
   imports: [MatIconModule, CommonModule]
 })
 export class StarRatingComponent {
-  @Input() rating: number = 0;
+  @Input() rating: number = 5;
   @Output() ratingChange: EventEmitter<number> = new EventEmitter<number>();
 
   stars: boolean[] = Array(5).fill(false);
