@@ -1,27 +1,87 @@
-# ECommerce
+# E-Commerce Store for Clothes
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.6.
+This is an e-commerce application for clothes built with Angular. It features a chatbot powered by Rasa AI to assist users with their shopping experience.
 
-## Development server
+## Prerequisites
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- [Node.js](https://nodejs.org/) (v14.x or later)
+- [Angular CLI](https://angular.io/cli)
+- [Python](https://www.python.org/) (v3.6 or later)
 
-## Code scaffolding
+## Getting Started
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Follow these steps to set up and run the project locally.
 
-## Build
+### Clone the Repository
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```bash
+git clone https://github.com/yourusername/your-repo-name.git
+cd your-repo-name
 
-## Running unit tests
+Install Dependencies
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Install the required npm packages:
 
-## Running end-to-end tests
+bash
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+npm install
 
-## Further help
+Run the Angular Application
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Start the Angular development server:
+
+bash
+
+ng serve
+
+The application will be available at http://localhost:4200/.
+Setting Up and Running Rasa AI
+
+Rasa AI is already included in the project. Follow these steps to set up and run Rasa AI:
+
+    Navigate to the Rasa Directory:
+
+    bash
+
+cd rasa
+
+Install Rasa and Rasa SDK:
+
+bash
+
+pip install rasa
+pip install rasa-sdk
+
+Train the Rasa Model:
+
+Make sure you have the necessary training data (nlu.yml, stories.yml, domain.yml, etc.) in the rasa directory.
+
+bash
+
+rasa train
+
+Run the Rasa Action Server:
+
+If you have custom actions defined, you need to run the action server:
+
+bash
+
+rasa run actions
+
+Run the Rasa Server:
+
+Start the Rasa server:
+
+bash
+
+    rasa run
+
+    The Rasa server will be available at http://localhost:5005/.
+
+Configuration
+
+Ensure your Angular application is configured to communicate with the Rasa server. This typically involves setting the correct URL for the Rasa webhook in your Angular service that handles chatbot interactions.
+Additional Notes
+
+    Ensure that your Rasa project files (like domain.yml, nlu.yml, stories.yml, etc.) are correctly set up and located in the rasa/ directory or the appropriate directory you've structured for your project.
+    The Angular application is configured to interact with the Rasa server for chatbot functionalities. Ensure the correct endpoint URLs are set in your Angular services.
