@@ -45,7 +45,7 @@ Rasa AI is already included in the project. Follow these steps to set up and run
 1. **Navigate to the Rasa Directory**:
 
     ```bash
-    cd rasa
+    cd rasa-ai
     ```
 
 2. **Install Rasa and Rasa SDK**:
