@@ -33,7 +33,6 @@ export class ChatDialogComponent {
     if (this.message) {
       this.messages.push({ text: this.message, sender: 'user' });
       this.chatService.sendMessage(this.message).subscribe(response => {
-        debugger;
         this.addToCart(response);
         response.forEach((msg: any) => this.messages.push({ text: msg.text, sender: 'bot' }));
       });

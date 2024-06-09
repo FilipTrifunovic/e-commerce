@@ -19,8 +19,12 @@
             Password is required
           </mat-error>
         </mat-form-field>
-        <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.form.valid"
-          class="full-width">Login</button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.form.valid" class="full-width">
+          Login
+        </button>
+        <button mat-raised-button color="accent" type="button" (click)="navigateToRegister()" class="full-width">
+          Register
+        </button>
         <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
       </form>
     </mat-card-content>

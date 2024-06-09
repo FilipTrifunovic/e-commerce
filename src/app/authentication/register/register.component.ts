@@ -7,30 +7,74 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { UserProfile, UserService } from '../user-profile.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css'],
-  imports: [MatFormFieldModule, MatInputModule, MatDatepickerModule, MatNativeDateModule, MatCheckboxModule, MatIconModule, FormsModule, CommonModule],
+  styleUrls: ['./register.component.scss'],
+  imports: [
+    MatFormFieldModule,
+    MatInputModule,
+    MatCardModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    FormsModule,
+    CommonModule,
+    MatButtonModule],
   standalone: true
 })
 export class RegisterComponent implements OnInit {
-  maxDate: any;
+  username: string;
+  password: string;
+  confirmPassword: string;
+  email: string;
+  errorMessage: string;
 
-  constructor() { }
+  constructor(
+    private router: Router,
+    private userService: UserService,
+    private toastr: ToastrService) { }
 
   ngOnInit() {
-    this.maxDate = new Date();
-    this.maxDate.setFullYear(this.maxDate.getFullYear() - 18);
+
   }
 
-  onSubmit(form: NgForm) {
-    console.log(form);
+  register() {
+    debugger;
+    if (this.password !== this.confirmPassword) {
+      this.errorMessage = 'Passwords do not match';
+      return;
+    }
+
+    const newUser: UserProfile = {
+      firstName: null,
+      lastName: null,
+      favoriteItems: [],
+      phone: null,
+      address: null,
+      email: this.email,
+      username: this.username,
+      password: this.password
+    };
+
+    if (this.username && this.password && this.email) {
+      this.userService.saveUser(newUser);
+      this.toastr.success('Registered successfully', 'Success', {
+        positionClass: 'toast-bottom-right'
+      });
+      this.router.navigate(['/login']);
+    } else {
+      this.errorMessage = 'Please fill in all fields';
+    }
   }
 
-  onClick() {
-    console.log('click');
+  goToLogin() {
+    this.router.navigate(['/login']);
   }
 
 }

@@ -5,9 +5,9 @@ export interface UserProfile {
   firstName: string;
   lastName: string;
   email: string;
-  phone: string;
-  address: string;
-  favoriteItems: string[];
+  phone: string | null;
+  address: string | null;
+  favoriteItems: string[] | null;
   username: string;
   password: string;
 }
@@ -43,5 +43,12 @@ export class UserService {
   updateUserProfile(userId: string, profileData: UserProfile): Observable<UserProfile> {
     this.userProfile = profileData;
     return of(this.userProfile);
+  }
+
+  saveUser(userProfile: UserProfile): UserProfile {
+    // In a real application, you would save the user to a backend server here.
+    // For this example, we will simply set the userProfile property.
+    this.userProfile = userProfile;
+    return this.userProfile;
   }
 }

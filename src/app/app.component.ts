@@ -83,6 +83,6 @@ export class AppComponent {
 }
 
 
-// rasa run -m models --enable-api --cors “*” --endpoints endpoints.yml --debug  - run rasa
+// rasa run -m models --enable-api --cors “*” --endpoints endpoints.yml --debug 
 // rasa run actions --port 5055
 

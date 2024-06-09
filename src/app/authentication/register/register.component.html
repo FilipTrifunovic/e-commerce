@@ -1,36 +1,51 @@
-<section class="signup-form">
-  <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="9px" #f="ngForm" (ngSubmit)="onSubmit(f)">
-    <mat-form-field>
-      <input type="email" matInput placeholder="Your email" ngModel name="email" email required #emailInput="ngModel">
-      <mat-error *ngIf="emailInput.hasError('required')">Field must not be empty.</mat-error>
-      <mat-error *ngIf="!emailInput.hasError('required')">Invalid E-mail.</mat-error>
-    </mat-form-field>
-    <mat-form-field>
-      <input type="text" matInput placeholder="Your name" ngModel name="name" required>
-      <mat-error>Field must not be empty.</mat-error>
-    </mat-form-field>
-    <mat-form-field hintLabel="Should be 3 characters long">
-      <input type="password" matInput placeholder="Your password" ngModel name="password" required minlength="3" #pwInput="ngModel">
-      <mat-hint align="end">{{ pwInput.value?.length }} /3</mat-hint>
-      <mat-error>Must be at least 3 character long.</mat-error>
-    </mat-form-field>
-    <!-- <mat-form-field>
-      <input type="password" matInput placeholder="Confirm your password" ngModel name="confpassword" required minlength="3">
-    </mat-form-field> --> 
-    <mat-form-field>
-      <input matInput 
-      placeholder="Your Birthdate" 
-      ngModel name="birthdate" 
-      [matDatepicker]="datePicker"
-      [max]="maxDate"
-      required>
-      <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
-      <mat-datepicker #datePicker></mat-datepicker>
-    </mat-form-field>
-      <mat-checkbox color="primary" ngModel name="agree" required>
-        Agree to Term and Conditions.
-      </mat-checkbox>
-    <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid"
-            [@buttonState]="f.valid ? 'valid' : 'invalid'"><mat-icon>done</mat-icon></button>
-  </form>
-</section>
+<div class="register-container">
+  <mat-card>
+    <mat-card-header class="card-header">
+      <mat-card-title>Register</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form #registerForm="ngForm" (ngSubmit)="register()">
+        <mat-form-field appearance="fill" class="full-width" floatLabel="always">
+          <mat-label>Username</mat-label>
+          <input matInput name="username" [(ngModel)]="username" #usernameCtrl="ngModel" required>
+          <mat-error *ngIf="usernameCtrl.invalid && (usernameCtrl.dirty || usernameCtrl.touched)">
+            Username is required
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="full-width" floatLabel="always">
+          <mat-label>Email</mat-label>
+          <input matInput name="email" [(ngModel)]="email" #emailCtrl="ngModel" type="email" required>
+          <mat-error *ngIf="emailCtrl.invalid && (emailCtrl.dirty || emailCtrl.touched)">
+            A valid email is required
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="full-width" floatLabel="always">
+          <mat-label>Password</mat-label>
+          <input matInput name="password" [(ngModel)]="password" #passwordCtrl="ngModel" type="password" required>
+          <mat-error *ngIf="passwordCtrl.invalid && (passwordCtrl.dirty || passwordCtrl.touched)">
+            Password is required
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="full-width" floatLabel="always">
+          <mat-label>Confirm Password</mat-label>
+          <input matInput name="confirmPassword" [(ngModel)]="confirmPassword" #confirmPasswordCtrl="ngModel"
+            type="password" required>
+          <mat-error *ngIf="confirmPasswordCtrl.invalid && (confirmPasswordCtrl.dirty || confirmPasswordCtrl.touched)">
+            Confirm password is required
+          </mat-error>
+          <mat-error *ngIf="password !== confirmPassword && confirmPasswordCtrl.dirty">
+            Passwords must match
+          </mat-error>
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit"
+          [disabled]="!registerForm.form.valid || password !== confirmPassword" class="full-width">
+          Register
+        </button>
+        <button mat-raised-button color="accent" class="full-width" (click)="goToLogin()">
+          Login
+        </button>
+        <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -52,11 +52,12 @@
           <mat-card-subtitle>{{ product.type }}</mat-card-subtitle>
         </mat-card-header>
         <img mat-card-image src="{{ product.image }}" alt="Photo of {{ product.title }}" class="card-image">
-        <mat-card-content>
+        <mat-card-content style="margin-top: 10px;">
+          <p> <strong>Price</strong>: {{ product.price }} $</p>
           <p>{{ product.description }}</p>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-raised-button color="primary" (click)="addToCart(product)">BUY: {{ product.price }} $</button>
+          <button mat-raised-button color="primary" (click)="addToCart(product)">Add to cart</button>
           <button mat-raised-button color="primary" class="view-details"
             [routerLink]="['/productDetails', product.id]">View
             Details</button>

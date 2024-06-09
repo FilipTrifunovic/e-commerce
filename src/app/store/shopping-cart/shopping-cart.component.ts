@@ -19,7 +19,7 @@ import { Subject, takeUntil } from 'rxjs';
 })
 export class ShoppingCartComponent implements OnInit, OnDestroy {
   cartItems: Product[] = [];
-  displayedColumns: string[] = ['image', 'name', 'quantity', 'price', 'total', 'actions'];
+  displayedColumns: string[] = ['image', 'name', 'quantity', 'size', 'dateCreated', 'manufacturer', 'type', 'price', 'total', 'actions'];
   private destroy$ = new Subject<void>();
 
   constructor(
