@@ -17,8 +17,6 @@ import { MatButtonModule } from '@angular/material/button';
   standalone: true
 })
 export class LoginComponent implements OnInit {
-  username: string = '';
-  password: string = '';
   errorMessage: string = '';
 
   constructor(private authService: AuthService, private router: Router) { }
@@ -27,18 +25,7 @@ export class LoginComponent implements OnInit {
   }
 
   login(): void {
-    if (!this.username || !this.password) {
-      this.errorMessage = 'Both fields are required';
-      return;
-    }
-    this.authService.signIn(this.username, this.password).subscribe(success => {
-      if (success) {
-        this.errorMessage = '';
-        this.router.navigate(['/']);
-      } else {
-        this.errorMessage = 'Invalid username or password';
-      }
-    });
+    this.authService.signIn();
   }
 
   navigateToRegister() {

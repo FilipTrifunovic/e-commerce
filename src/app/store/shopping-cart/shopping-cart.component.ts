@@ -51,7 +51,6 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
     this.shoppingCartService.cartItems$
       .pipe(takeUntil(this.destroy$))
       .subscribe(items => {
-        debugger;
         this.cartItems = items;
         if (this.cartItems.length === 0) {
           this.cartItems = [];

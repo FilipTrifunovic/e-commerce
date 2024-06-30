@@ -49,7 +49,6 @@ export class ChatDialogComponent {
 
 
   closeDialog(): void {
-
   }
 
 }

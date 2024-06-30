@@ -1,4 +1,4 @@
-import { Component, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
@@ -16,10 +16,16 @@ import { UserService } from './authentication/user-profile.service';
 import { UserProfileComponent } from './authentication/user-profile/user-profile.component';
 import { ChatService } from './shared/services/chat.service';
 import { HttpClientModule } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { LoginRedirectGuard } from './authentication/login-guard.service';
+import { AuthGuard } from './authentication/auth-guard.service';
+import { CallbackComponent } from './authentication/callback/callback.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss',
   imports: [
     CommonModule,
     RouterOutlet,
@@ -32,26 +38,32 @@ import { HttpClientModule } from '@angular/common/http';
     ShoppingCartComponent,
     RouterModule,
     UserProfileComponent,
-    HttpClientModule],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
+    HttpClientModule,
+    CallbackComponent],
   providers: [
     ProductService,
     ShoppingCartService,
     AuthService,
     UserService,
-    ChatService]
+    ChatService,
+    LoginRedirectGuard,
+    AuthGuard]
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   @ViewChild('sidenav') sidenav: MatSidenav;
   title = 'e-commerce';
   private dialogRef: MatDialogRef<ChatDialogComponent>;
   searchResults: any;
+  isAuthenticated$: Observable<boolean>;
 
   constructor(
     private dialog: MatDialog,
     public authService: AuthService,
     private viewContainerRef: ViewContainerRef) { }
+
+  ngOnInit(): void {
+    this.isAuthenticated$ = this.authService.isAuthenticated();
+  }
 
   toggleSidenav() {
     this.sidenav.toggle();

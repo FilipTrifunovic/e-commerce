@@ -1,14 +1,13 @@
 <mat-sidenav-container>
-  <mat-sidenav #sidenav role="navigation" *ngIf="authService.isAuthenticated()">
+  <mat-sidenav #sidenav role="navigation" *ngIf="isAuthenticated$ | async">
     <app-sidenav-list (closeSidenav)="sidenav.close()"></app-sidenav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <app-header *ngIf="authService.isAuthenticated()" (sideNavToggle)="sidenav.toggle()"></app-header>
+    <app-header *ngIf="isAuthenticated$ | async" (sideNavToggle)="sidenav.toggle()"></app-header>
     <!-- <app-search-toolbar (search)="handleSearch($event)" *ngIf="authService.isAuthenticated()"></app-search-toolbar> -->
     <main class="main-content">
       <router-outlet></router-outlet>
-      <button mat-fab color="secondary" class="chat-button" (click)="openChatDialog()"
-        *ngIf="authService.isAuthenticated()">
+      <button mat-fab color="secondary" class="chat-button" (click)="openChatDialog()" *ngIf="isAuthenticated$ | async">
         <mat-icon>chat</mat-icon>
       </button>
     </main>

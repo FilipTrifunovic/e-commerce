@@ -45,32 +45,14 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    debugger;
-    if (this.password !== this.confirmPassword) {
-      this.errorMessage = 'Passwords do not match';
-      return;
-    }
 
     const newUser: UserProfile = {
-      firstName: null,
-      lastName: null,
       favoriteItems: [],
       phone: null,
       address: null,
       email: this.email,
-      username: this.username,
-      password: this.password
+      username: this.username
     };
-
-    if (this.username && this.password && this.email) {
-      this.userService.saveUser(newUser);
-      this.toastr.success('Registered successfully', 'Success', {
-        positionClass: 'toast-bottom-right'
-      });
-      this.router.navigate(['/login']);
-    } else {
-      this.errorMessage = 'Please fill in all fields';
-    }
   }
 
   goToLogin() {

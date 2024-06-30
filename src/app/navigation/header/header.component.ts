@@ -29,11 +29,10 @@ import { Observable } from 'rxjs';
 export class HeaderComponent implements OnInit {
   @Output() sideNavToggle = new EventEmitter<void>();
   totalItems$: Observable<number>;
-  isAuth = true;
 
 
   constructor(
-    private authService: AuthService,
+    public authService: AuthService,
     public shoppingCartService: ShoppingCartService,
     private router: Router
   ) { }
