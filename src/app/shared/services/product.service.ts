@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { CLOTHES_SIZE, CLOTHES_TYPE, Product, Review } from "../models/product.model";
+import { CLOTHES_SIZE, CLOTHES_SIZE_LABELS, CLOTHES_TYPE, CLOTHES_TYPE_LABELS, Product, Review } from "../models/product.model";
 
 import { BehaviorSubject, Observable, from, tap } from "rxjs";
 import { ApiService } from "./api.service";
@@ -48,6 +48,14 @@ export class ProductService {
 
   getProductById(id: string): Observable<Product> {
     return this.apiService.get<Product>(`products/${id}`);
+  }
+
+  getClothesSizeLabel(size: CLOTHES_SIZE): string {
+    return CLOTHES_SIZE_LABELS[size] || 'Unknown';
+  }
+
+  getClothesTypeLabel(type: CLOTHES_TYPE): string {
+    return CLOTHES_TYPE_LABELS[type] || 'Unknown';
   }
 
 } 

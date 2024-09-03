@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../../shared/services/product.service';
-import { Product } from '../../shared/models/product.model';
+import { CLOTHES_SIZE, CLOTHES_TYPE, Product } from '../../shared/models/product.model';
 import { MatCard, MatCardModule } from '@angular/material/card';
 import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
 import { ShoppingCartService } from '../../shared/services/shopping-cart.service';
@@ -61,15 +61,19 @@ export class ProductDetailComponent implements OnInit {
   }
 
   onSubmit(): void {
-    const formValue = this.rateCommentForm.value;
-    console.log('Rating:', formValue.rating);
-    console.log('Comment:', formValue.comment);
-
-    // Here you would send the form data to your backend to save the rating and comment
+    const formValue = this.rateCommentForm.value
   }
 
   goBack(): void {
     this.router.navigate(['/']);
+  }
+
+  getClothesTypeLabel(type: CLOTHES_TYPE): string {
+    return this.productService.getClothesTypeLabel(type);
+  }
+
+  getSizeTypeLabel(size: CLOTHES_SIZE): string {
+    return this.productService.getClothesSizeLabel(size);
   }
 
   addToCart(product: Product) {

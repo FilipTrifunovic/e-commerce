@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
+import { EnumToStringPipe } from '../../shared/models/enum-to-string.pipe';
 
 
 @Component({
@@ -15,7 +16,7 @@ import { Subject, takeUntil } from 'rxjs';
   templateUrl: './shopping-cart.component.html',
   styleUrls: ['./shopping-cart.component.scss'],
   standalone: true,
-  imports: [MatCardModule, CommonModule, MatTableModule, MatButtonModule, MatIconModule]
+  imports: [MatCardModule, CommonModule, MatTableModule, MatButtonModule, MatIconModule, EnumToStringPipe]
 })
 export class ShoppingCartComponent implements OnInit, OnDestroy {
   cartItems: Product[] = [];

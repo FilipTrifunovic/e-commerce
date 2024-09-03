@@ -14,8 +14,8 @@
     <img mat-card-image [src]="item.image" alt="{{ item.title }}" class="item-image">
     <mat-card-content>
       <p><strong>Description:</strong>{{ item.description }}</p>
-      <p><strong>Type:</strong> {{ item.type }}</p>
-      <p><strong>Size:</strong> {{ item.size }}</p>
+      <p><strong>Type:</strong> {{ getClothesTypeLabel(item.type) }}</p>
+      <p><strong>Size:</strong> {{ getSizeTypeLabel(item.size) }}</p>
       <p><strong>Manufacturer:</strong> {{ item.manufacturer }}</p>
       <p><strong>Date of Production:</strong> {{ item.dateCreated | date }}</p>
       <p><strong>Price:</strong> {{ item.price | currency }}</p>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../shared/services/product.service';
-import { CLOTHES_SIZE, CLOTHES_TYPE, Product } from '../shared/models/product.model';
+import { CLOTHES_SIZE, CLOTHES_SIZE_LABELS, CLOTHES_TYPE, CLOTHES_TYPE_LABELS, Product } from '../shared/models/product.model';
 import { MatCardModule } from '@angular/material/card';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
@@ -39,8 +39,13 @@ import { Filters } from './models/filters';
 export class HomeComponent implements OnInit {
   searchForm: FormGroup;
   products: Product[] = [];
-  clothesTypes = Object.values(CLOTHES_TYPE);
-  sizes = Object.values(CLOTHES_SIZE);
+  clothesTypes = Object.keys(CLOTHES_TYPE)
+    .filter(key => !isNaN(Number(CLOTHES_TYPE[key as any])))
+    .map(key => ({ label: CLOTHES_TYPE_LABELS[CLOTHES_TYPE[key as any]], value: CLOTHES_TYPE[key as any] }));
+  sizes = Object.keys(CLOTHES_SIZE)
+    .filter(key => !isNaN(Number(CLOTHES_SIZE[key as any])))
+    .map(key => ({ label: CLOTHES_SIZE_LABELS[CLOTHES_SIZE[key as any]], value: CLOTHES_SIZE[key as any] }));
+
   constructor(
     private productService: ProductService,
     private shoppingCartService: ShoppingCartService,
@@ -67,6 +72,19 @@ export class HomeComponent implements OnInit {
     this.getProducts();
   }
 
+  // Method to be used in the template to get clothes type label
+  getClothesTypeLabel(type: CLOTHES_TYPE): string {
+    return this.productService.getClothesTypeLabel(type);
+  }
+
+
+  getClothesTypeLabels(): string[] {
+    return Object.keys(CLOTHES_TYPE)
+      .filter(key => isNaN(Number(key))) // Filters out numeric keys
+      .map(key => CLOTHES_TYPE_LABELS[CLOTHES_TYPE[key as keyof typeof CLOTHES_TYPE]]);
+  }
+
+
   clearFilters(): void {
     this.searchForm.reset();
     this.filteredProducts = this.products;
@@ -77,13 +95,16 @@ export class HomeComponent implements OnInit {
   }
 
 
+
+
+
   getProducts() {
     const filters: Filters = {
       title: this.getFormValueOrNull(this.searchForm.value.title),
       priceFrom: this.getFormValueOrNull(this.searchForm.value.priceFrom),
       priceTo: this.getFormValueOrNull(this.searchForm.value.priceTo),
-      clothesType: this.getFormValueOrNull(this.searchForm.value.type),
-      size: this.getFormValueOrNull(this.searchForm.value.size),
+      clothesType: this.searchForm.value.type === '' ? null : this.searchForm.value.type,
+      size: this.searchForm.value.size == '' ? null : this.searchForm.value.size,
       manufacturer: this.getFormValueOrNull(this.searchForm.value.manufacturer)
     };
 

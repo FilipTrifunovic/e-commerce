@@ -45,15 +45,13 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    debugger;
     this.authService.register(this.username, this.email, this.password, this.confirmPassword).subscribe(
       () => {
-        this.toast.success('Registration failed');
+        this.toast.success('You can now log in to your account.', 'Registration successful!');
         this.goToLogin();
       },
       error => {
         this.toast.error('Registration failed', error.error.text);
-        console.error('Registration failed', error);
       }
     );
   }

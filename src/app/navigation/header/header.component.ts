@@ -49,9 +49,7 @@ export class HeaderComponent implements OnInit {
     this.authService.signOut();
   }
 
-  goToShoppingCart() {
-    console.log('go to shopping cart');
-  }
+  goToShoppingCart() { }
 
   navigateToShoppingCartPage() {
     this.router.navigate(['/shoppingCart']);

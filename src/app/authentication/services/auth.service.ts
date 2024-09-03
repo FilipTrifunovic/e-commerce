@@ -14,6 +14,14 @@ const authConfig: AuthConfig = {
   showDebugInformation: true,
   strictDiscoveryDocumentValidation: false,
   postLogoutRedirectUri: window.location.origin,
+
+  useSilentRefresh: false, // Disable silent refresh
+  sessionChecksEnabled: false,
+  clearHashAfterLogin: true,
+  oidc: true,
+  customQueryParams: {
+    prompt: 'login' // Forces login every time
+  }
 };
 
 @Injectable({
@@ -65,7 +73,6 @@ export class AuthService {
         this.router.navigate(['/login']);
       }
     }).catch(error => {
-      console.error('Error in discovery document loading or login:', error);
       this.router.navigate(['/login']);
     });
   }

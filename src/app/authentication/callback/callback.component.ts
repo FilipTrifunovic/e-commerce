@@ -9,9 +9,7 @@ import { AuthService } from '../services/auth.service';
   template: '<p>Logging in...</p>',
 })
 export class CallbackComponent {
-  constructor(
-    private authService: AuthService) {
-    console.log('CallbackComponent');
+  constructor() {
     //this.authService.tryLogin();
   }
 }

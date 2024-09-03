@@ -21,30 +21,38 @@ export class ShoppingCartService {
 
     if (existingItem) {
       existingItem.quantity += quantity;
+      this.updateTotalItems();
     } else {
       this.productService.getProductById(productId.toString()).subscribe((product: Product) => {
-        debugger;
         var productState = this.productService.addOrReturnProduct(product);
         productState.quantity = quantity;
         items.push(productState);
+        this.cartItemsSubject.next(items);
+        this.updateTotalItems();
       });
     }
-
-    this.cartItemsSubject.next(items);
-    this.updateTotalItems();
   }
 
   removeProduct(productId: number) {
-    const items = this.cartItemsSubject.value;
-    const existingItem = items.find(item => item.id === productId);
+    // Get the current items
+    const items = [...this.cartItemsSubject.value]; // Create a shallow copy of the array
+    const existingItemIndex = items.findIndex(item => item.id === productId);
 
-    if (existingItem) {
+    // Check if the item exists in the cart
+    if (existingItemIndex > -1) {
+      const existingItem = items[existingItemIndex];
       existingItem.quantity -= 1;
+
+      // If the quantity is zero, remove the item from the array
       if (existingItem.quantity === 0) {
-        items.splice(items.indexOf(existingItem), 1);
+        items.splice(existingItemIndex, 1);
+      } else {
+        // Update the modified item in the copied array
+        items[existingItemIndex] = existingItem;
       }
     }
 
+    // Update the cart items with a new reference
     this.cartItemsSubject.next(items);
     this.updateTotalItems();
   }
