@@ -9,11 +9,14 @@
           <p class="login-description">
             Please click the button below to authenticate via our Identity Server. Ensure your credentials are ready.
           </p>
-        </div>
-        <div>
-          <button mat-raised-button color="primary" (click)="login()" type="submit" class="login-button">
-            Login with Identity Server
-          </button>
+          <div>
+            <button mat-raised-button color="primary" (click)="login()" type="submit" class="login-button">
+              Login
+            </button>
+            <button mat-raised-button color="primary" (click)="goToRegister()" type="button" class="register-button">
+              Register
+            </button>
+          </div>
         </div>
       </div>
     </mat-card-content>

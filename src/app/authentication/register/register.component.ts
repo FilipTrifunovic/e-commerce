@@ -10,8 +10,9 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-import { UserProfile, UserService } from '../user-profile.service';
+import { UserProfile, UserService } from '../services/user-profile.service';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -30,29 +31,31 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class RegisterComponent implements OnInit {
   username: string;
+  email: string;
   password: string;
   confirmPassword: string;
-  email: string;
-  errorMessage: string;
 
   constructor(
     private router: Router,
-    private userService: UserService,
-    private toastr: ToastrService) { }
+    private authService: AuthService,
+    private toast: ToastrService) { }
 
   ngOnInit() {
 
   }
 
   register() {
-
-    const newUser: UserProfile = {
-      favoriteItems: [],
-      phone: null,
-      address: null,
-      email: this.email,
-      username: this.username
-    };
+    debugger;
+    this.authService.register(this.username, this.email, this.password, this.confirmPassword).subscribe(
+      () => {
+        this.toast.success('Registration failed');
+        this.goToLogin();
+      },
+      error => {
+        this.toast.error('Registration failed', error.error.text);
+        console.error('Registration failed', error);
+      }
+    );
   }
 
   goToLogin() {

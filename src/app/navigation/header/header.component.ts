@@ -5,7 +5,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatBadgeModule } from '@angular/material/badge';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
-import { AuthService } from '../../authentication/auth.service';
+import { AuthService } from '../../authentication/services/auth.service';
 import { ShoppingCartService } from '../../shared/services/shopping-cart.service';
 import { Router, RouterModule } from '@angular/router';
 import { Observable } from 'rxjs';

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { UserProfile, UserService } from '../user-profile.service';
+import { UserProfile, UserService } from '../services/user-profile.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -25,6 +25,7 @@ import { Router } from '@angular/router';
 })
 export class UserProfileComponent implements OnInit {
   profileForm: FormGroup;
+  profile: UserProfile;
 
   constructor(
     private router: Router,
@@ -37,17 +38,16 @@ export class UserProfileComponent implements OnInit {
       email: [''],
       phone: [''],
       address: [''],
-      favoriteItems: [''],
+      //favoriteItems: [''],
       username: [''],
-      password: ['']
+      //password: ['']
     });
   }
 
   ngOnInit() {
-    // Pretpostavljamo da imamo userId iz sesije ili autentifikacije
-    const userId = '123'; // Zamenite stvarnim ID-em korisnika
-    this.userService.getUserProfile(userId).subscribe((profile: UserProfile) => {
-      this.profileForm.patchValue(profile);
+    this.userService.getUserProfileData().subscribe((profile: UserProfile) => {
+      this.profile = this.userService.createUserProfile(profile);
+      this.profileForm.patchValue(this.profile);
     });
   }
 
@@ -56,9 +56,9 @@ export class UserProfileComponent implements OnInit {
   }
 
   onSubmit() {
+    debugger;
     if (this.profileForm.valid) {
-      const userId = '123'; // Zamenite stvarnim ID-em korisnika
-      this.userService.updateUserProfile(userId, this.profileForm.value).subscribe((profile: UserProfile) => {
+      this.userService.updateUserProfile(this.profile.id, this.profileForm.value).subscribe((profile: UserProfile) => {
         this.profileForm.patchValue(profile);
         this.toastr.success('Profile uploaded', 'Success', {
           positionClass: 'toast-bottom-right'

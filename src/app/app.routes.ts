@@ -2,12 +2,12 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './authentication/register/register.component';
 import { LoginComponent } from './authentication/login/login.component';
-import { AuthGuard } from './authentication/auth-guard.service';
+import { AuthGuard } from './authentication/services/auth.guard';
 import { ShoppingCartComponent } from './store/shopping-cart/shopping-cart.component';
 import { UserProfileComponent } from './authentication/user-profile/user-profile.component';
 import { ProductDetailComponent } from './store/product-details/product-details.component';
 import { CallbackComponent } from './authentication/callback/callback.component';
-import { LoginRedirectGuard } from './authentication/login-guard.service';
+import { LoginRedirectGuard } from './authentication/services/login-guard.service';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },

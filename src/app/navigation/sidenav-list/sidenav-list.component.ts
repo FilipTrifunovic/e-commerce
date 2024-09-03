@@ -2,7 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
-import { AuthService } from '../../authentication/auth.service';
+import { AuthService } from '../../authentication/services/auth.service';
 
 @Component({
   selector: 'app-sidenav-list',

@@ -9,17 +9,18 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { ChatDialogComponent } from './shared/components/chat-dialog/chat-dialog.component';
 import { ProductService } from './shared/services/product.service';
-import { AuthService } from './authentication/auth.service';
+import { AuthService } from './authentication/services/auth.service';
 import { ShoppingCartService } from './shared/services/shopping-cart.service';
 import { ShoppingCartComponent } from './store/shopping-cart/shopping-cart.component';
-import { UserService } from './authentication/user-profile.service';
+import { UserService } from './authentication/services/user-profile.service';
 import { UserProfileComponent } from './authentication/user-profile/user-profile.component';
 import { ChatService } from './shared/services/chat.service';
 import { HttpClientModule } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { LoginRedirectGuard } from './authentication/login-guard.service';
-import { AuthGuard } from './authentication/auth-guard.service';
+import { LoginRedirectGuard } from './authentication/services/login-guard.service';
+import { AuthGuard } from './authentication/services/auth.guard';
 import { CallbackComponent } from './authentication/callback/callback.component';
+import { ApiService } from './shared/services/api.service';
 
 @Component({
   selector: 'app-root',
@@ -43,11 +44,11 @@ import { CallbackComponent } from './authentication/callback/callback.component'
   providers: [
     ProductService,
     ShoppingCartService,
-    AuthService,
     UserService,
     ChatService,
     LoginRedirectGuard,
-    AuthGuard]
+    AuthGuard,
+    ApiService]
 })
 export class AppComponent implements OnInit {
   @ViewChild('sidenav') sidenav: MatSidenav;
@@ -62,6 +63,7 @@ export class AppComponent implements OnInit {
     private viewContainerRef: ViewContainerRef) { }
 
   ngOnInit(): void {
+    this.authService.configureOAuth();
     this.isAuthenticated$ = this.authService.isAuthenticated();
   }
 
@@ -95,6 +97,6 @@ export class AppComponent implements OnInit {
 }
 
 
-// rasa run -m models --enable-api --cors “*” --endpoints endpoints.yml --debug 
+// rasa run -m models --enable-api --cors “*” --endpoints endpoints.yml --debug
 // rasa run actions --port 5055
 

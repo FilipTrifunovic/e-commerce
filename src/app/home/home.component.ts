@@ -14,6 +14,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { RouterModule } from '@angular/router';
+import { ApiService } from '../shared/services/api.service';
+import { Filters } from './models/filters';
 
 @Component({
   selector: 'app-home',
@@ -43,7 +45,8 @@ export class HomeComponent implements OnInit {
     private productService: ProductService,
     private shoppingCartService: ShoppingCartService,
     private toastr: ToastrService,
-    private fb: FormBuilder) {
+    private fb: FormBuilder,
+    private apiService: ApiService) {
     this.searchForm = this.fb.group({
       title: [''],
       priceFrom: [''],
@@ -58,22 +61,10 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.getProducts();
-    this.getSearchFilter();
   }
 
   applyFilters(): void {
-    const { title, priceFrom, priceTo, type, size, manufacturer } = this.searchForm.value;
-
-    this.filteredProducts = this.products.filter(product => {
-      return (
-        (!title || product.title.toLowerCase().includes(title.toLowerCase())) &&
-        (!priceFrom || product.price >= priceFrom) &&
-        (!priceTo || product.price <= priceTo) &&
-        (!type || product.type === type) &&
-        (!size || product.size === size) &&
-        (!manufacturer || product.manufacturer === manufacturer)
-      );
-    });
+    this.getProducts();
   }
 
   clearFilters(): void {
@@ -81,31 +72,31 @@ export class HomeComponent implements OnInit {
     this.filteredProducts = this.products;
   }
 
+  private getFormValueOrNull(value: any): any {
+    return value ? value : null;
+  }
+
+
   getProducts() {
-    this.productService.getProductList().
-      subscribe(
+    const filters: Filters = {
+      title: this.getFormValueOrNull(this.searchForm.value.title),
+      priceFrom: this.getFormValueOrNull(this.searchForm.value.priceFrom),
+      priceTo: this.getFormValueOrNull(this.searchForm.value.priceTo),
+      clothesType: this.getFormValueOrNull(this.searchForm.value.type),
+      size: this.getFormValueOrNull(this.searchForm.value.size),
+      manufacturer: this.getFormValueOrNull(this.searchForm.value.manufacturer)
+    };
+
+    this.productService.getProductList(filters)
+      .subscribe(
         (products) => {
           this.products = products;
+          this.filteredProducts = this.products;
         }
       )
   }
 
-  getSearchFilter() {
-    this.productService.currentSearchCriteria.subscribe(criteria => {
-      if (criteria !== null && criteria.trim().length > 0)
-        this.filterProducts(criteria);
-    });
-    this.filteredProducts = this.products;
-  }
 
-  filterProducts(criteria: any) {
-    this.filteredProducts = this.products.filter(product =>
-      product.size.toLowerCase().includes(criteria.size.toLowerCase()) ||
-      product.dateCreated == criteria.dateCreated ||
-      (product.price >= criteria.minPrice && product.price <= criteria.maxPrice) ||
-      product.type.toLowerCase().includes(criteria.type.toLowerCase())
-    );
-  }
 
   addToCart(product: Product) {
     this.shoppingCartService.addProduct(product.id, 1);

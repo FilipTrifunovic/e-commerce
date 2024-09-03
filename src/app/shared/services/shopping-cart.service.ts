@@ -22,9 +22,12 @@ export class ShoppingCartService {
     if (existingItem) {
       existingItem.quantity += quantity;
     } else {
-      var product = this.productService.getProductById(productId);
-      product.quantity = quantity;
-      items.push(product);
+      this.productService.getProductById(productId.toString()).subscribe((product: Product) => {
+        debugger;
+        var productState = this.productService.addOrReturnProduct(product);
+        productState.quantity = quantity;
+        items.push(productState);
+      });
     }
 
     this.cartItemsSubject.next(items);

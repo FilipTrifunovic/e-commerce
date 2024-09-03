@@ -44,7 +44,7 @@
     </mat-card>
   </mat-sidenav>
   <mat-sidenav-content>
-    <div class="products-container">
+    <div class="products-container" *ngIf="products">
       <mat-card class="product-card" *ngFor="let product of filteredProducts">
         <mat-card-header>
           <!-- <div mat-card-avatar class="example-header-image"></div> -->
